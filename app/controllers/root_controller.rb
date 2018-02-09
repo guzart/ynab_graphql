@@ -18,6 +18,7 @@ class RootController < ApplicationController
       '“Measuring programming progress by lines of code is like measuring aircraft building progress by weight.” – Bill Gates',
       '“Good design adds value faster than it adds cost.” – Thomas C. Gale',
       '“Good code is its own best documentation. As you\'re about to add a comment, ask yourself, "How can I improve the code so that this comment isn\'t needed?" Improve the code and then document it to make it even clearer.” – Steve McConnell',
+      '“Any code of your own that you haven\'t looked at for six or more months might as well have been written by someone else.” – Eagleson\'s law',
     ].sample
   end
 end
