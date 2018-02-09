@@ -7,7 +7,11 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.4'
+
+gem 'graphql'
 gem 'puma', '~> 3.7'
+gem 'rack-attack'
+gem 'rack-cors'
 gem 'redis', '~> 3.0'
 
 # Use ActiveModel has_secure_password
@@ -16,16 +20,13 @@ gem 'redis', '~> 3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails'
 end
 
 group :development do
+  gem 'dotenv-rails'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
