@@ -1,24 +1,15 @@
-# README
+# YNAB GraphQL API Proxy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## TODO
 
-Things you may want to cover:
+* Use a lazy evaluator
+* Add subscriptions
 
-* Ruby version
+## Resources
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* http://graphql-ruby.org/schema/lazy_execution.html
+* http://www.rubydoc.info/github/jnunemaker/httparty
+* http://graphql-ruby.org/guides
+* https://devcenter.heroku.com/articles/heroku-button
+* https://devcenter.heroku.com/articles/app-json-schema
+* https://github.com/graphql/graphiql
