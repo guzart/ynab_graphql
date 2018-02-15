@@ -12,7 +12,19 @@ Types::BudgetType = GraphQL::ObjectType.define do
     }
   end
 
+  field :categories, types[Types::CategoryType] do
+    resolve ->(_obj, _args, _ctx) {
+      []
+    }
+  end
+
   field :category_groups, types[Types::CategoryGroupType] do
+    resolve ->(_obj, _args, _ctx) {
+      []
+    }
+  end
+
+  field :months, types[Types::BudgetMonthType] do
     resolve ->(_obj, _args, _ctx) {
       []
     }
