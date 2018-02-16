@@ -37,5 +37,6 @@ module YnabGraphql
         resource '*', headers: :any, methods: [:get, :post, :options]
       end
     end
+    config.middleware.use BatchLoader::Middleware
   end
 end

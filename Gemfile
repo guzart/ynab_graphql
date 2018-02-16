@@ -8,6 +8,7 @@ end
 
 gem 'rails', '~> 5.1.4'
 
+gem 'batch-loader'
 gem 'graphql'
 gem 'puma', '~> 3.7'
 gem 'rack-attack'
