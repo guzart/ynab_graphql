@@ -1,4 +1,4 @@
-Types::MonthType = GraphQL::ObjectType.define do
+Types::BudgetMonthType = GraphQL::ObjectType.define do
   name "BudgetMonth"
   field :month, !types.String
   field :note, types.String

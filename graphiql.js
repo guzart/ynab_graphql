@@ -10,6 +10,8 @@ app.get('/', (req, res) => {
   });
   res.send(response);
 });
+
+console.log('GraphiQL server at http://localhost:4000/')
 app.listen(4000);
 
 

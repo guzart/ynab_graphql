@@ -9,6 +9,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   end
 
   field :accounts, types[Types::AccountType] do
+    description "List budget accounts"
     argument :budget_id, types.String
     resolve ->(_obj, _args, _ctx) {
       []
@@ -16,6 +17,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   end
 
   field :transactions, types[Types::TransactionType] do
+    description "List budget or account transactions"
     argument :budget_id, !types.String
     argument :account_id, types.String
 
