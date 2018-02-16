@@ -15,6 +15,16 @@ class YNABApiService
     open_struct response['data']['budget']
   end
 
+  def accounts(budget_id)
+    response = get("/budgets/#{budget_id}/accounts")
+    open_struct response['data']['accounts']
+  end
+
+  def account(budget_id, account_id)
+    response = get("/budgets/#{budget_id}/accounts/#{account_id}")
+    open_struct response['data']['account']
+  end
+
   private
 
   def get(path)
