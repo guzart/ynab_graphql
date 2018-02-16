@@ -1,0 +1,7 @@
+FROM ynab_graphql
+
+ENV RAILS_ENV=development
+
+RUN bundle install --with development test
+
+CMD ["bundle", "exec", "rails", "s"]

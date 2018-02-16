@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    image: ynab_graphql_dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/var/ynab_graphql
+    links:
+      - redis
+  redis:
+    image: redis:4-alpine
