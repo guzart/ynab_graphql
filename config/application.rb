@@ -30,6 +30,8 @@ module YnabGraphql
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.cache_store = :redis_store, "redis://redis:6379/0/cache"
+
     config.middleware.use Rack::Attack
     config.middleware.insert_before 0, Rack::Cors do
       allow do

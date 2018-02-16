@@ -3,7 +3,7 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {}
+    context = { access_token: ENV['YNAB_ACCESS_TOKEN'] }
     result = YNABGraphqlSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   end
