@@ -10,6 +10,9 @@ services:
     volumes:
       - .:/var/ynab_graphql
     depends_on:
+      - database
       - redis
+  database:
+    image: mongo:3.6
   redis:
     image: redis:4-alpine
