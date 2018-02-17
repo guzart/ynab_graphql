@@ -28,10 +28,8 @@ class YNABApiService
   private
 
   def get(path)
-    cache_fetch(path) do
-      response = HTTParty.get(path, request_options)
-      response.parsed_response
-    end
+    response = HTTParty.get(path, request_options)
+    response.parsed_response
   end
 
   def request_options
@@ -51,19 +49,5 @@ class YNABApiService
     else
       data
     end
-  end
-
-  def cache_fetch(key)
-    Rails.cache.fetch(cache_key(key), expires_in: 12.hours) do
-      yield
-    end
-  end
-
-  def cache_key(*values)
-    [cache_prefix].concat(values).join('/')
-  end
-
-  def cache_prefix
-    @cache_prefix ||= Digest::SHA1.hexdigest(access_token)
   end
 end
