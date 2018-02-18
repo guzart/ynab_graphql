@@ -211,12 +211,12 @@ const buildContext = (): Context => {
     CategoryGroup: "CategoryGroup",
     CurrencyFormat: "CurrencyFormat",
     DateFormat: "DateFormat",
-    MonthDetail: "BudgetMonth",
+    MonthDetail: "Month",
     Payee: "Payee",
     PayeeLocation: "PayeeLocation",
-    ScheduledSubTransaction: "ScheduledSubTransaction",
+    ScheduledSubTransaction: "ScheduledSubtransaction",
     ScheduledTransactionSummary: "ScheduledTransaction",
-    SubTransaction: "SubTransaction",
+    SubTransaction: "Subtransaction",
     TransactionSummary: "Transaction"
   };
 
@@ -268,6 +268,10 @@ const ensureFieldDescription = (
       )
     : modelContent;
 
+const ensureModelFile = (filepath: string, modelName: string) =>
+  !fs.existsSync(filepath) &&
+  fs.writeFileSync(filepath, modelTemplate({ name: modelName }));
+
 const writeModels = (context: Context, models: Model[]) => {
   const modelsPath = path.resolve("app/models");
   const getModelFilepath = (name: string) =>
@@ -275,9 +279,7 @@ const writeModels = (context: Context, models: Model[]) => {
 
   models.forEach(model => {
     const filepath = getModelFilepath(model.name);
-    if (!fs.existsSync(filepath)) {
-      fs.writeFileSync(filepath, modelTemplate({ name: model.name }));
-    }
+    ensureModelFile(filepath, model.name);
 
     let modelContents = fs.readFileSync(filepath).toString();
     model.fields.forEach(field => {
@@ -286,6 +288,8 @@ const writeModels = (context: Context, models: Model[]) => {
 
       if (field.referenceName) {
         const relationModelFilepath = getModelFilepath(field.referenceName);
+        ensureModelFile(relationModelFilepath, field.referenceName);
+
         const relationFieldDescription = getFieldDescription({
           name: snakeCase(model.name),
           type: "EmbeddedIn"
@@ -306,6 +310,6 @@ const writeModels = (context: Context, models: Model[]) => {
 gulp.task("swagger", () => {
   const context = buildContext();
   const models = extractModels(context);
-  console.log(JSON.stringify(models, null, 2));
+  // console.log(JSON.stringify(models, null, 2));
   writeModels(context, models);
 });
