@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node graphiql.js"
+    "start": "node graphiql.js",
+    "swagger": "gulp swagger"
   },
   "dependencies": {
     "@types/gulp": "^4.0.5",

@@ -6,6 +6,5 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es5"
-  },
-  "include": ["gulpfile.ts"]
+  }
 }
