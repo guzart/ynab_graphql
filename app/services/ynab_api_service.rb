@@ -12,7 +12,8 @@ class YNABApiService
     end
   end
 
-  def budget(budget_id)
+  # TODO: Pass server knowledge parameter
+  def full_budget(budget_id)
     response = get("/budgets/#{budget_id}")
     server_knowledge = response['data']['server_knowledge']
     response['data']['budget'].merge(

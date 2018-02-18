@@ -32,7 +32,7 @@ class BudgetRepository
 
   def fetch_full_budget(budget_id)
     budget = Budget.find_by(user_hash: user_hash, id: budget_id)
-    return budget if budget && budget.accounts
+    return budget if budget && !budget.accounts.empty?
 
     if !budget
       budget_data = request_full_budget_data(budget_id)
