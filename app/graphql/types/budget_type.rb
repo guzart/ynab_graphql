@@ -7,8 +7,8 @@ Types::BudgetType = GraphQL::ObjectType.define do
   field :currency_format, Types::CurrencyFormatType
 
   field :accounts, types[Types::AccountType] do
-    resolve ->(_obj, _args, _ctx) {
-      []
+    resolve ->(obj, _args, ctx) {
+      ctx[:budget_repository].budget_accounts(obj.id)
     }
   end
 

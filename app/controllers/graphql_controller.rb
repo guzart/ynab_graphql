@@ -1,10 +1,11 @@
 class GraphqlController < ApplicationController
   def execute
-    variables = ensure_hash(params[:variables])
-    query = params[:query]
-    operation_name = params[:operationName]
-    context = { access_token: ENV['YNAB_ACCESS_TOKEN'] }
-    result = YNABGraphqlSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = YNABGraphqlSchema.execute(
+      params[:query],
+      variables: ensure_hash(params[:variables]),
+      context: build_context,
+      operation_name: params[:operationName]
+    )
     render json: result
   end
 
@@ -26,5 +27,13 @@ class GraphqlController < ApplicationController
     else
       raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
     end
+  end
+
+  def build_context
+    access_token = ENV['YNAB_ACCESS_TOKEN']
+    {
+      access_token: access_token,
+      budget_repository: BudgetRepository.new(access_token)
+    }
   end
 end

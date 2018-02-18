@@ -2,5 +2,5 @@ class DateFormat
   include Mongoid::Document
 
   embedded_in :budget
-  field :locale, type: String
+  field :format, type: String
 end

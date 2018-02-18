@@ -7,22 +7,18 @@ class YNABApiService
 
   def budgets
     response = get('/budgets')
-    open_struct response['data']['budgets']
+    response['data']['budgets'].map do |budget_data|
+      budget_data.merge('user_hash' => user_hash)
+    end
   end
 
   def budget(budget_id)
     response = get("/budgets/#{budget_id}")
-    open_struct response['data']['budget']
-  end
-
-  def accounts(budget_id)
-    response = get("/budgets/#{budget_id}/accounts")
-    open_struct response['data']['accounts']
-  end
-
-  def account(budget_id, account_id)
-    response = get("/budgets/#{budget_id}/accounts/#{account_id}")
-    open_struct response['data']['account']
+    server_knowledge = response['data']['server_knowledge']
+    response['data']['budget'].merge(
+      'user_hash' => user_hash,
+      'server_knowledge' => server_knowledge
+    )
   end
 
   private
@@ -37,17 +33,10 @@ class YNABApiService
     { base_uri: 'https://api.youneedabudget.com/papi/v1/', headers: headers }
   end
 
-  def open_struct(data)
-    if data.is_a?(Array)
-      return data.map { |i| open_struct(i) }
-    elsif data.is_a?(Hash)
-      OpenStruct.new(
-        data.each_with_object({}) do |(key, val), memo|
-          memo[key] = val.is_a?(Hash) ? open_struct(val) : val
-        end
-      )
-    else
-      data
+  def user_hash
+    @user_hash ||= begin
+      key = Rails.application.secrets[:secret_key_base]
+      OpenSSL::HMAC.hexdigest("SHA512", key, access_token)
     end
   end
 end

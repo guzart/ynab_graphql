@@ -4,16 +4,15 @@ Types::QueryType = GraphQL::ObjectType.define do
   field :budgets, types[Types::BudgetType] do
     description "List budgets"
     resolve ->(_obj, _args, ctx) {
-      client = YNABApiService.new(ctx[:access_token])
-      client.budgets
+      ctx[:budget_repository].user_budgets
     }
   end
 
   field :accounts, types[Types::AccountType] do
     description "List budget accounts"
     argument :budget_id, types.String
-    resolve ->(_obj, _args, _ctx) {
-      []
+    resolve ->(_obj, args, ctx) {
+      ctx[:budget_repository].budget_accounts(args[:budget_id])
     }
   end
 

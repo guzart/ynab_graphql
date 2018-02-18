@@ -1,9 +1,14 @@
 class Budget
   include Mongoid::Document
 
+  field :user_hash, type: String
+  field :server_knowledge, type: Integer
+
   field :id, type: String
   field :name, type: String
   field :last_modified_on, type: String
+  field :first_month, type: String
+  field :last_month, type: String
   embeds_one :date_format
   embeds_one :currency_format
   embeds_many :accounts
