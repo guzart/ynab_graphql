@@ -8,7 +8,6 @@ end
 
 gem 'rails', '~> 5.1.4'
 
-gem 'batch-loader'
 gem 'graphql'
 gem 'httparty'
 gem 'mongoid'
