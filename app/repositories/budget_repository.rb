@@ -39,6 +39,11 @@ class BudgetRepository
       return Budget.create(budget_data)
     end
 
+    # if budget.server_knowledge > 0
+    #   budget_data = request_full_budget_data(budget_id, last_server_knowledge: budget.server_knowledge)
+    #   # TODO: Custom deep merge service
+    # end
+
     budget_data = request_full_budget_data(budget_id)
     budget.update(budget_data)
     budget

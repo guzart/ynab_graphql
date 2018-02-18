@@ -13,8 +13,8 @@ class YNABApiService
   end
 
   # TODO: Pass server knowledge parameter
-  def full_budget(budget_id)
-    response = get("/budgets/#{budget_id}")
+  def full_budget(budget_id, last_server_knowledge: nil)
+    response = get("/budgets/#{budget_id}", query: { last_knowledge_of_server: last_server_knowledge })
     server_knowledge = response['data']['server_knowledge']
     response['data']['budget'].merge(
       'user_hash' => user_hash,
@@ -24,8 +24,8 @@ class YNABApiService
 
   private
 
-  def get(path)
-    response = HTTParty.get(path, request_options)
+  def get(path, options = {})
+    response = HTTParty.get(path, options.merge(request_options))
     response.parsed_response
   end
 
